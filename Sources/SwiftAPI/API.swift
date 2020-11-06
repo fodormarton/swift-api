@@ -22,5 +22,5 @@ public protocol APIParamsConvertable {
 
 public enum API {
     public static let session = URLSession(configuration: .ephemeral)
-    static var cancellables = Set<AnyCancellable>()
+    public static var cancellables = Set<AnyCancellable>()
 }
