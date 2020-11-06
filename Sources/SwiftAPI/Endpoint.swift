@@ -7,21 +7,21 @@
 
 import Foundation
 
-struct EndpointParams {
-    let header: APIParams
-    let query: APIParams
-    let body: APIParams
+public struct EndpointParams {
+    public let header: APIParams
+    public let query: APIParams
+    public let body: APIParams
 
-    init(header: APIParams = APIParams(), query: APIParams = APIParams(), body: APIParams = APIParams()) {
+    public init(header: APIParams = APIParams(), query: APIParams = APIParams(), body: APIParams = APIParams()) {
         self.header = header
         self.query = query
         self.body = body
     }
 
-    static let empty = EndpointParams()
+    public static let empty = EndpointParams()
 }
 
-protocol Endpoint {
+public protocol Endpoint {
     static var path: String { get }
     static var method: HTTPMethod { get }
     static func request(to baseURL: URL, commonHeaders: APIParams, params: EndpointParams) -> URLRequest
@@ -29,7 +29,7 @@ protocol Endpoint {
 }
 
 extension Endpoint {
-    static func assembleURL(base: URL, path: String, parameters: APIParams) -> URL {
+    public static func assembleURL(base: URL, path: String, parameters: APIParams) -> URL {
         var urlString = base.absoluteString.appending(path)
         switch method {
             case .GET:
@@ -48,7 +48,7 @@ extension Endpoint {
         return URL(string: urlString)!
     }
 
-    static func request(to baseURL: URL, commonHeaders: APIParams, params: EndpointParams) -> URLRequest {
+    public static func request(to baseURL: URL, commonHeaders: APIParams, params: EndpointParams) -> URLRequest {
         var request = URLRequest(url: assembleURL(base: baseURL, path: path, parameters: params.query))
         request.allHTTPHeaderFields = commonHeaders.merging(params.header) { $1 } //EndpointParam headers overwrite common headers of the same key
         params.header.forEach { request.setValue($1, forHTTPHeaderField: $0) }

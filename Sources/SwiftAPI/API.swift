@@ -8,19 +8,19 @@
 import Foundation
 import Combine
 
-enum HTTPMethod: String {
+public enum HTTPMethod: String {
     case GET
     case POST
     case PUT
     case DELETE
 }
 
-typealias APIParams = [String: String]
-protocol APIParamsConvertable {
+public typealias APIParams = [String: String]
+public protocol APIParamsConvertable {
     var asAPIParams: APIParams { get }
 }
 
-enum API {
+public enum API {
     internal static let session = URLSession(configuration: .ephemeral)
     static var cancellables = Set<AnyCancellable>()
 }
