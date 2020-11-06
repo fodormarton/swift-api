@@ -3,17 +3,18 @@
 
 import PackageDescription
 
+let packageName = "SwiftAPI"
 let package = Package(
-    name: "SwiftAPI",
+    name: packageName,
     platforms: [
         .iOS(.v14)
     ],
     products: [
-        .library(name: "SwiftAPI", targets: ["SwiftAPI"]),
+        .library(name: packageName, targets: [packageName]),
     ],
     dependencies: [],
     targets: [
-        .target( name: "SwiftAPI", dependencies: []),
+        .target( name: packageName, dependencies: []),
     ],
     swiftLanguageVersions: [.version("5.3")]
 )
