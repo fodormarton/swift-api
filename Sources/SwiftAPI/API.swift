@@ -21,6 +21,11 @@ public protocol APIParamsConvertable {
 }
 
 public enum API {
-    public static let session = URLSession(configuration: .ephemeral)
+    public static let session: URLSession = {
+        URLProtocol.registerClass(DebugPrintURLProtocol.self)
+        let configuration = URLSessionConfiguration.ephemeral
+        configuration.protocolClasses?.insert(DebugPrintURLProtocol.self, at: 0)
+        return URLSession(configuration: configuration)
+    }()
     public static var cancellables = Set<AnyCancellable>()
 }
