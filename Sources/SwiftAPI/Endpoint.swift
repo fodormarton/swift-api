@@ -53,7 +53,9 @@ extension Endpoint {
         request.allHTTPHeaderFields = commonHeaders.merging(params.header) { $1 } //EndpointParam headers overwrite common headers of the same key
         params.header.forEach { request.setValue($1, forHTTPHeaderField: $0) }
         request.httpMethod = method.rawValue
-        request.httpBody = try! JSONEncoder().encode(params.body)
+        if !params.body.isEmpty {
+            request.httpBody = try! JSONEncoder().encode(params.body)
+        }
         return request
     }
 }
