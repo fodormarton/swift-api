@@ -48,8 +48,8 @@ extension Endpoint {
         return URL(string: urlString)!
     }
 
-    public static func request(to baseURL: URL, commonHeaders: APIParams, params: EndpointParams) -> URLRequest {
-        var request = URLRequest(url: assembleURL(base: baseURL, path: path, parameters: params.query))
+    public static func request(to baseURL: URL, extraPath: String = "", commonHeaders: APIParams, params: EndpointParams) -> URLRequest {
+        var request = URLRequest(url: assembleURL(base: baseURL, path: path.appending(extraPath), parameters: params.query))
         request.allHTTPHeaderFields = commonHeaders.merging(params.header) { $1 } //EndpointParam headers overwrite common headers of the same key
         params.header.forEach { request.setValue($1, forHTTPHeaderField: $0) }
         request.httpMethod = method.rawValue
