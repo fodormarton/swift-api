@@ -24,7 +24,7 @@ public struct EndpointParams {
 public protocol Endpoint {
     static var path: String { get }
     static var method: HTTPMethod { get }
-    static func request(to baseURL: URL, commonHeaders: APIParams, params: EndpointParams) -> URLRequest
+    static func request(to baseURL: URL, extraPath: String, commonHeaders: APIParams, params: EndpointParams) -> URLRequest
     associatedtype ResponseType
 }
 
