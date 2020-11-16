@@ -20,6 +20,10 @@ public protocol APIParamsConvertable {
     var asAPIParams: APIParams { get }
 }
 
+public enum APIError: Error {
+    case error(underlyingError: Error)
+}
+
 public enum API {
     public static let session: URLSession = {
         URLProtocol.registerClass(DebugPrintURLProtocol.self)
